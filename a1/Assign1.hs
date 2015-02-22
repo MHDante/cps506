@@ -37,7 +37,6 @@ module Assign1 where
     myToLower x = trifecta ord (+32) chr x
     tst6 = myToLower 'S'
     trifectaCorrect = tst6 == 's'
-
     
     main = do        
         if mapCFCorrect && trifectaCorrect && allPairFuncCorrect
