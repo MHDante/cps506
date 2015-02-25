@@ -1,11 +1,12 @@
 module Assign1 where
-	
-	--Name:   Dante Camarena
-	--Course: CPS506, Winter 2015, Assignment #1
-	--Due:    2015.02.16 23:59
-	--Credit: This is entirely my own work.
+        
+    --Name:   Dante Camarena
+    --Id: 500534815
+    --Course: CPS506, Winter 2015, Assignment #1
+    --Due:    2015.02.16 23:59
+    --Credit: This is entirely my own work.
     
-	import Data.Char
+    import Data.Char
 
     trifecta :: (a -> b) -> (b -> c) -> (c -> d) -> a -> d
     trifecta a b c d = c$b$a$d

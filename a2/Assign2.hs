@@ -1,6 +1,13 @@
 module Assign2 where
-    --import Test.HUnit
-    --import Test.QuickCheck
+
+    --Name:   Dante Camarena
+    --Id: 500534815
+    --Course: CPS506, Winter 2015, Assignment #1
+    --Due:    2015.02.16 23:59
+    --Credit: This is entirely my own work.
+    --NOTE: I skipped part 5 because I found it too tedious and unapproachable and caused me
+    --      a great deal of stress over figuring out implementation the last few days.
+    --      A datatype that involves "everything but the kitchen sink" is hardly a datatype.
     
     data Sink t = Yes|
                 No|
@@ -11,14 +18,14 @@ module Assign2 where
                 Other t
             
     instance Show (Sink t) where
-        show Yes = "True"
-        show No = "False"
+        show Yes = show True
+        show No = show False
         show (AnInteger i) = show i
         show (ADouble d) = show d
         show (List l) = show l
         show (AString s) = show s
         show (Other _) = "This sink is Generic"
-
+ 
     class Extract t where
         asBool:: t->Bool
         asInteger:: t-> Int
@@ -117,4 +124,7 @@ module Assign2 where
         signum _ = error "Operation Not Supported"
         
     main :: IO ()
-    main = print (asBool $ AString "no")
+    main = do
+        -- insert test data here.
+        print (asBool $ AString "no")
+        
