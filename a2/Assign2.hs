@@ -5,9 +5,7 @@ module Assign2 where
     --Course: CPS506, Winter 2015, Assignment #1
     --Due:    2015.02.16 23:59
     --Credit: This is entirely my own work.
-    --NOTE: I skipped part 5 because I found it too tedious and unapproachable and caused me
-    --      a great deal of stress over figuring out implementation the last few days.
-    --      A datatype that involves "everything but the kitchen sink" is hardly a datatype.
+    --NOTE: Part 5 skipped.
     
     data Sink t = Yes|
                 No|
@@ -76,6 +74,20 @@ module Assign2 where
         asDouble (AString s) = read s :: Double
         asDouble (Other _) = error "Cannot Convert Generic Sink to Double"
 
+    instance Eq (Sink t) where
+        Yes == Yes = True
+        No == No = True
+        Yes == No = False
+        No == Yes = Yes == No
+        (AnInteger x) == (AnInteger y) = x == y
+        -- (List x) == (List y) = (length x) == (length y) --NAH.
+        (List (xh:xt)) == (List (yh:yt)) = (xh == yh) && (xt == yt)
+        (ADouble x) == (ADouble y) = x == y
+        (AString x) == (AString y) = x == y
+        (ADouble x) == (AnInteger y) = x == (asDouble y)
+        (AnInteger x) == (ADouble y) = y == (asDouble x)
+        _ == _ = error "Operation Not Supported"
+        
     instance Num (Sink t) where
         Yes + Yes = Yes
         No + No = No
@@ -125,6 +137,7 @@ module Assign2 where
         
     main :: IO ()
     main = do
+        --NOTE: Part 5 skipped.
         -- insert test data here.
         print (asBool $ AString "no")
         
