@@ -15,7 +15,7 @@ module Assign1 where
     mapCF a b  = map f where f = b a
     
     allPairFunc :: [a -> b -> Bool] -> [(a,b)] -> Bool
-    allPairFunc (h1:t1) (h2:t2) = ((h1 (fst h2)) (snd h2)) && allPairFunc t1 t2
+    allPairFunc (h1:t1) (h2:t2) = (h1 (fst h2)) (snd h2) && allPairFunc t1 t2
     allPairFunc [] [] = True
     allPairFunc (_:_) [] = False
     allPairFunc [] (_:_) = False

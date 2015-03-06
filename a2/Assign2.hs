@@ -2,7 +2,7 @@ module Assign2 where
 
     --Name:   Dante Camarena
     --Id: 500534815
-    --Course: CPS506, Winter 2015, Assignment #1
+    --Course: CPS506, Winter 2015, Assignment #2
     --Due:    2015.02.16 23:59
     --Credit: This is entirely my own work.
     --NOTE: I skipped part 5 because I found it too tedious and unapproachable and caused me
