@@ -60,11 +60,11 @@ module Assign3 where
     getAnalyzer x [d1,d2] = getAnalyzer x (d1:d2:" 8")
 
 
-    getAnalyzer (Piece Pawn Black) ['S',' ',d] = \board (x,y) -> if not (elem d ['1'..'8']) then Nothing else
+    getAnalyzer (Piece Pawn Black) ['S',' ',d] = \board (x,y) -> if notElem d ['1'..'8'] then Nothing else
             if d /= '1' && y == 6 && (select board (x,y-1) == Just Empty) && (select board (x,y-2) == Just Empty)
                 then Just (Occupy (x,y-2)) else if select board (x,y-1) == Just Empty
                     then Just (Occupy (x,y-1)) else Nothing
-    getAnalyzer (Piece Pawn White) ['N',' ',d] = \board (x,y) -> if not (elem d ['1'..'8']) then Nothing else
+    getAnalyzer (Piece Pawn White) ['N',' ',d] = \board (x,y) -> if notElem d ['1'..'8'] then Nothing else
             if d /= '1' && y == 1 && (select board (x,y+1) == Just Empty) && (select board (x,y+2) == Just Empty)
                 then Just (Occupy (x,y+2)) else if select board (x,y+1) == Just Empty
                     then Just (Occupy (x,y+1)) else Nothing
@@ -110,7 +110,7 @@ module Assign3 where
     analHelper (dx,dy) limit i c board (x,y) 
         | i > limit = Nothing
         | isNothing (select board coords) = Nothing
-        | otherwise = if (select board coords) /= Just Empty then eatOrOccupy board c coords else
+        | otherwise = if select board coords /= Just Empty then eatOrOccupy board c coords else
                           let next = analHelper (dx,dy) limit (i+1) c board (x,y) in
                               if isNothing next then eatOrOccupy board c coords else next
         where coords = (x+i*dx, y+i*dy)
@@ -189,7 +189,7 @@ module Assign3 where
     parse :: Board -> String -> Maybe (Piece, Coord, Analyzer)
     parse board (a:n:' ':xs)
         | isNothing mPc = Nothing
-        | not (elem a ['a'..'h']) || not (elem n['1'..'8']) = Nothing 
+        | notElem a ['a'..'h'] || notElem n['1'..'8'] = Nothing 
         | otherwise = let pc = fromJust mPc in Just (pc, coord, getAnalyzer pc xs)
         where
             coord = (ord a - ord 'a',8 - (ord n - ord '0'))
