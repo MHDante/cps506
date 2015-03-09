@@ -5,9 +5,6 @@ module Assign2 where
     --Course: CPS506, Winter 2015, Assignment #2
     --Due:    2015.02.16 23:59
     --Credit: This is entirely my own work.
-    --NOTE: I skipped part 5 because I found it too tedious and unapproachable and caused me
-    --      a great deal of stress over figuring out implementation the last few days.
-    --      A datatype that involves "everything but the kitchen sink" is hardly a datatype.
     
     data Sink t = Yes|
                 No|
