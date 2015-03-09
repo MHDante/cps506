@@ -15,13 +15,13 @@ module Assign1 where
     mapCF a b  = map f where f = b a
     
     allPairFunc :: [a -> b -> Bool] -> [(a,b)] -> Bool
-    allPairFunc (h1:t1) (h2:t2) = (h1 (fst h2)) (snd h2) && allPairFunc t1 t2
+    allPairFunc (h1:t1) (h2:t2) = uncurry h1 h2 && allPairFunc t1 t2
     allPairFunc [] [] = True
     allPairFunc (_:_) [] = False
     allPairFunc [] (_:_) = False
 
     divBy :: Int -> Int -> Bool
-    divBy x y = (mod y x) == 0
+    divBy x y = mod y x == 0
     
     greaterThan :: Int -> Int -> Bool
     greaterThan x y = x>y
@@ -58,7 +58,7 @@ module Assign1 where
     tst3 = allPairFunc fns2 pairs2
     
     allPairFuncCorrect :: Bool
-    allPairFuncCorrect = (tst1 == True && tst2 == False && tst3 == False)
+    allPairFuncCorrect = tst1 && not tst2 && not tst3
     
     tst4 :: [Bool]
     tst4 = mapCF 2 divBy [3,4,5,6,7]
@@ -68,14 +68,14 @@ module Assign1 where
     mapCFCorrect = (tst4 == [False,True,False,True,False]) && (tst5 == [True,True,False,False,False])
     
     myToLower :: Char -> Char
-    myToLower x = trifecta ord (+32) chr x
+    myToLower = trifecta ord (+32) chr
     tst6 :: Char
     tst6 = myToLower 'S'
     trifectaCorrect :: Bool
     trifectaCorrect = tst6 == 's'
     
     main :: IO ()
-    main = do        
-        if mapCFCorrect && trifectaCorrect && allPairFuncCorrect
-            then print("Assignment Complete!")
-            else print("Get back to work!")
+    main = 
+        print (if mapCFCorrect && trifectaCorrect && allPairFuncCorrect
+            then "Assignment Complete!"
+            else "Get back to work!")

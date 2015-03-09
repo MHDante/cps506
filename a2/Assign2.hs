@@ -14,7 +14,7 @@ module Assign2 where
                 AnInteger Int|
                 ADouble Double|
                 List [Sink t] |
-                AString [Char] |
+                AString String |
                 Other t
             
     instance Show (Sink t) where
@@ -42,12 +42,12 @@ module Assign2 where
         asBool 0 = False
         asBool _ = True
         asInteger = id
-        asDouble i = fromIntegral i
+        asDouble  = fromIntegral
 
     instance Extract Double where
         asBool 0.0 = False
         asBool _ = True
-        asInteger d = truncate d
+        asInteger = truncate
         asDouble = id
 
     instance Extract (Sink t) where
@@ -55,8 +55,8 @@ module Assign2 where
         asBool No = False
         asBool (AnInteger i) = asBool i
         asBool (ADouble d) = asBool d
-        asBool (List l) = (length l) > 0 
-        asBool (AString s) | (elem s ["True","true","yes","Yes"]) = True
+        asBool (List l) = not (null l)
+        asBool (AString s) | elem s ["True","true","yes","Yes"] = True
                            | otherwise = False
         asBool (Other _) = error "Cannot Convert Generic Sink to Bool"
         
@@ -81,10 +81,10 @@ module Assign2 where
         No + No = No
         No + Yes = Yes
         Yes + No = Yes
-        (AnInteger a) + x = AnInteger (a + (asInteger x))
-        x + (AnInteger a) = AnInteger (a + (asInteger x))
-        (ADouble a) + x = ADouble (a + (asDouble x))
-        x + (ADouble a) = ADouble (a + (asDouble x))
+        (AnInteger a) + x = AnInteger (a + asInteger x)
+        x + (AnInteger a) = AnInteger (a + asInteger x)
+        (ADouble a) + x = ADouble (a + asDouble x)
+        x + (ADouble a) = ADouble (a + asDouble x)
         (List a) + (List b) = List (a++b)
         (AString a) + (AString b) = AString(a++b)
         _ + _ = error "Operation Not Supported"
@@ -93,10 +93,10 @@ module Assign2 where
         No * No = No
         No * Yes = No
         Yes * No = No
-        (AnInteger a) * x = AnInteger (a * (asInteger x))
-        x * (AnInteger a) = AnInteger (a * (asInteger x))
-        (ADouble a) * x = ADouble (a * (asDouble x))
-        x * (ADouble a) = ADouble (a * (asDouble x))
+        (AnInteger a) * x = AnInteger (a * asInteger x)
+        x * (AnInteger a) = AnInteger (a * asInteger x)
+        (ADouble a) * x = ADouble (a * asDouble x)
+        x * (ADouble a) = ADouble (a * asDouble x)
         _ * _ = error "Operation Not Supported"
 
         negate Yes = No
@@ -124,7 +124,7 @@ module Assign2 where
         signum _ = error "Operation Not Supported"
         
     main :: IO ()
-    main = do
+    main =
         -- insert test data here.
         print (asBool $ AString "no")
         
