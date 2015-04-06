@@ -12,12 +12,12 @@ module Assign3 where
     ----------END COLOR
     data Rank = King|Queen |Rook |Knight |Bishop |Pawn deriving (Eq)
     instance Show Rank where
-        show King = "K"
-        show Queen = "Q"
-        show Rook = "R"
-        show Knight = "Kn"
-        show Bishop = "B"
-        show Pawn = "P"
+        show King =     "K"
+        show Queen =    "Q"
+        show Rook =     "R"
+        show Knight =   "Kn"
+        show Bishop =   "B"
+        show Pawn =     "P"
     ----------PIECE 
     data Piece = Piece Rank Color|Empty deriving (Eq)
     instance Show Piece where

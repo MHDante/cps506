@@ -1,8 +1,5 @@
 %%%-------------------------------------------------------------------
 %%% @author Dante
-%%% @copyright (C) 2015, <COMPANY>
-%%% @doc
-%%%
 %%% @end
 %%% Created : 02. Apr 2015 10:49 AM
 %%%-------------------------------------------------------------------
@@ -157,7 +154,7 @@ showBoard(#boardstate{board = Board, blackCaptures = B, whiteCaptures = W,turn =
     true -> "\n"
     end
   end,
-  divider() ++"\n"++showHelper(Board, 1, Msg) ++ letters().
+  "\n"++divider() ++"\n"++showHelper(Board, 1, Msg) ++ letters().
 
 applyMove(BS = #boardstate{board=Board, blackCaptures = B, whiteCaptures = W,turn = Turn}, MV) ->
   Prs = parse(Board, MV),
@@ -203,7 +200,6 @@ updateState(#boardstate{board=Board, blackCaptures = B, whiteCaptures = W,turn =
 
 parse(Board, [A,N,$\s|XS]) ->
   Coord = [(A - $a) + 1 , N - $0],
-  [X,Y] = Coord,
   Pce = select(Board, Coord),
   if
     Pce == nothing -> nothing;
